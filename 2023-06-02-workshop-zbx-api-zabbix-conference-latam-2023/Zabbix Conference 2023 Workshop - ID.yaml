@@ -1,0 +1,95 @@
+zabbix_export:
+  version: '6.0'
+  date: '2023-05-30T09:00:52Z'
+  groups:
+    -
+      uuid: 422a5f985aa34933b81ca298ec745005
+      name: JLCP
+    -
+      uuid: 41a69c5b87454a46a58d9cab08797d40
+      name: 'Zabbix Conference 2023'
+  templates:
+    -
+      uuid: ef2302b3ad1b4934b362e2b2581265b8
+      template: 'Zabbix Conference 2023 Workshop - ID'
+      name: 'Zabbix Conference 2023 Workshop - ID'
+      groups:
+        -
+          name: JLCP
+      items:
+        -
+          uuid: 8029df5e979745699f2b0f686af13296
+          name: 'Raw: Product List'
+          type: HTTP_AGENT
+          key: products.raw
+          delay: 5m
+          history: 0d
+          trends: '0'
+          value_type: TEXT
+          timeout: 5s
+          url: 'https://dummyjson.com/products'
+          tags:
+            -
+              tag: App
+              value: Raw
+      discovery_rules:
+        -
+          uuid: 7427fd52e6344feea96ea6948d955337
+          name: 'Discovery Products'
+          type: DEPENDENT
+          key: lld.products
+          delay: '0'
+          lifetime: 0d
+          host_prototypes:
+            -
+              uuid: 18450a434e0649109983981d132e36a0
+              host: '{#PRODUCT.ID}-{#PRODUCT.NAME}'
+              name: '{#PRODUCT.ID}-{#PRODUCT.NAME}'
+              group_links:
+                -
+                  group:
+                    name: 'Zabbix Conference 2023'
+              group_prototypes:
+                -
+                  name: 'Zabbix Conference 2023/{#PRODUCT.CATEGORY}'
+              templates:
+                -
+                  name: 'Zabbix Conference 2023 Workshop - Product'
+              macros:
+                -
+                  macro: '{$PRODUCT.CATEGORY}'
+                  value: '{#PRODUCT.CATEGORY}'
+                -
+                  macro: '{$PRODUCT.ID}'
+                  value: '{#PRODUCT.ID}'
+                -
+                  macro: '{$PRODUCT.NAME}'
+                  value: '{#PRODUCT.NAME}'
+              tags:
+                -
+                  tag: PRODUCT
+                  value: '{#PRODUCT.CATEGORY}'
+          master_item:
+            key: products.raw
+          preprocessing:
+            -
+              type: JAVASCRIPT
+              parameters:
+                - |
+                  var output = [];
+                  
+                  var jsonData = JSON.parse(value);
+                  jsonData.products.forEach(function(product) {
+                      output.push({
+                          '{#PRODUCT.ID}': product.id,
+                          '{#PRODUCT.NAME}': product.title,
+                          '{#PRODUCT.CATEGORY}': product.category,
+                          '{#PRODUCT.BRAND}': product.brand
+                      });
+                  });
+                  
+                  return JSON.stringify(output);
+      tags:
+        -
+          tag: Zabbix_Conference
+          value: '2023'

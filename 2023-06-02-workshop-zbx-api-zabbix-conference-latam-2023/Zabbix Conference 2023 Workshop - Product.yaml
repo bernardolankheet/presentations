@@ -1,0 +1,111 @@
+zabbix_export:
+  version: '6.0'
+  date: '2023-05-30T09:01:05Z'
+  groups:
+    -
+      uuid: 422a5f985aa34933b81ca298ec745005
+      name: JLCP
+  templates:
+    -
+      uuid: 8c5d9c51a7ad47859dd491a880278e2b
+      template: 'Zabbix Conference 2023 Workshop - Product'
+      name: 'Zabbix Conference 2023 Workshop - Product'
+      groups:
+        -
+          name: JLCP
+      items:
+        -
+          uuid: c860ac0d8c2f4b14ac45591c2e785b82
+          name: 'Discount Percentage'
+          type: DEPENDENT
+          key: 'discountPercentage.[{$PRODUCT.ID}]'
+          delay: '0'
+          value_type: FLOAT
+          units: '%'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.discountPercentage
+          master_item:
+            key: 'raw.[{$PRODUCT.ID}]'
+          tags:
+            -
+              tag: PRODUCT
+              value: INFO
+        -
+          uuid: 5905353a5fbf4f419d40585fdaaeb08b
+          name: Price
+          type: DEPENDENT
+          key: 'price.[{$PRODUCT.ID}]'
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.price
+          master_item:
+            key: 'raw.[{$PRODUCT.ID}]'
+          tags:
+            -
+              tag: PRODUCT
+              value: INFO
+        -
+          uuid: f58f3373704d4895bf00ab5c29800c3c
+          name: Rating
+          type: DEPENDENT
+          key: 'rating.[{$PRODUCT.ID}]'
+          delay: '0'
+          value_type: FLOAT
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.rating
+          master_item:
+            key: 'raw.[{$PRODUCT.ID}]'
+          tags:
+            -
+              tag: PRODUCT
+              value: INFO
+        -
+          uuid: ec839497878c477883fa1da1236b49a8
+          name: 'Item Info Raw'
+          type: HTTP_AGENT
+          key: 'raw.[{$PRODUCT.ID}]'
+          history: 0d
+          trends: '0'
+          value_type: TEXT
+          url: 'https://dummyjson.com/products/{$PRODUCT.ID}'
+          tags:
+            -
+              tag: App
+              value: Raw
+        -
+          uuid: c1a45100f8664df5bfdd81a64833e1a5
+          name: Stock
+          type: DEPENDENT
+          key: 'stock.[{$PRODUCT.ID}]'
+          delay: '0'
+          preprocessing:
+            -
+              type: JSONPATH
+              parameters:
+                - $.stock
+          master_item:
+            key: 'raw.[{$PRODUCT.ID}]'
+          tags:
+            -
+              tag: PRODUCT
+              value: INFO
+      tags:
+        -
+          tag: Zabbix_Conference
+          value: '2023'
+      macros:
+        -
+          macro: '{$PRODUCT.CATEGORY}'
+        -
+          macro: '{$PRODUCT.ID}'
+        -
+          macro: '{$PRODUCT.NAME}'
