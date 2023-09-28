@@ -18,10 +18,10 @@ Azure:
 * https://learn.microsoft.com/pt-br/training/paths/microsoft-azure-fundamentals-describe-cloud-concepts/?%3Fwt.mc_id=academic-7823-cyzanon
 * https://learn.microsoft.com/pt-br/training/modules/create-an-azure-account/?wt.mc_id=slidescontent_S-1049_webinar_reactor
 * https://www.udemy.com/course/guia-definitivo-para-certificacao-microsoft-azure-az-900-y/?couponCode=AZ900AZURE
+
 Conta free para estudantes
 * https://azure.microsoft.com/pt-br/free/students/?wt.mc_id=slidescontent_S-1049_webinar_reactor
 * https://azure.microsoft.com/en-us/free
-
 
 AWS:
 * https://aws.amazon.com/pt/training/course-descriptions/cloud-practitioner-essentials/
@@ -31,7 +31,6 @@ AWS:
 ### Docker: 
 Livro Docker para Iniciantes - Rafael Gomex:
 * https://leanpub.com/dockerparadesenvolvedores
-
 
 ### Linux:
 * https://www.linuxtips.io/course/linux-essentials
@@ -46,8 +45,14 @@ LinuxTips:
 * https://www.youtube.com/@LinuxTips/search?query=devops
 Matheus Muller
 * https://www.youtube.com/@MateusMuller
+Rafael Gomes
+* https://gomex.me/blog/primeiros_passos_devops/
 
 ### Meus Links
 * https://www.bernardolankheet.com.br
+
+## Eventos:
+* https://devopsdays.org
+
 
 
