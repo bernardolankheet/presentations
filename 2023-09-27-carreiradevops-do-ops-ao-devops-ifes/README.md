@@ -39,12 +39,16 @@ Livro Docker para Iniciantes - Rafael Gomex:
 ### DevOps:
 PlayList RobertSilva: 
 * https://www.youtube.com/watch?v=gFSRYd0YJh4&list=PLg7nVxv7fa6ej--3RO-CPlCmvqJESMPgY
+
 Docker DCA - Caio Delgado:
 * https://www.youtube.com/watch?v=U-GGoWq26C4&list=PL4ESbIHXST_TJ4TvoXezA0UssP1hYbP9_
+
 LinuxTips:
 * https://www.youtube.com/@LinuxTips/search?query=devops
+
 Matheus Muller
 * https://www.youtube.com/@MateusMuller
+
 Rafael Gomes
 * https://gomex.me/blog/primeiros_passos_devops/
 
