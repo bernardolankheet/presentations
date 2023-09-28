@@ -5,3 +5,9 @@ My Presentations and code related to them
     
 * [2023-06-02-workshop-zbx-api-zabbix-conference-latam-2023](2023-06-02-workshop-zbx-api-zabbix-conference-latam-2023)
     * https://www.zabbix.com/br/events/conference_latam_2023#workshops
+
+* [2023-06-02-prevenindo-acidentes-em-rodovias-com-zabbix-conference-latam-2023](2023-06-02-prevenindo-acidentes-em-rodovias-com-zabbix-conference-latam-2023)
+    * https://www.zabbix.com/br/events/conference_latam_2023#agenda
+
+* [2023-09-27-carreiradevops-do-ops-ao-devops-ifes](2023-09-27-carreiradevops-do-ops-ao-devops-ifes)
+    * https://www.even3.com.br/workshopinformatica2023/
