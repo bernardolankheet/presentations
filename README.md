@@ -11,3 +11,6 @@ My Presentations and code related to them
 
 * [2023-09-27-carreiradevops-do-ops-ao-devops-ifes](2023-09-27-carreiradevops-do-ops-ao-devops-ifes)
     * https://www.even3.com.br/workshopinformatica2023/
+
+* [2023-12-05-construindo-monitoramento-autonomo-de-cloud-com-zabbix-coongresso-ti](2023-12-05-construindo-monitoramento-autonomo-de-cloud-com-zabbix-coongresso-ti)
+    * https://congressodeti.com.br/
