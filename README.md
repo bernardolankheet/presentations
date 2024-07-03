@@ -14,3 +14,12 @@ My Presentations and code related to them
 
 * [2023-12-05-construindo-monitoramento-autonomo-de-cloud-com-zabbix-coongresso-ti](2023-12-05-construindo-monitoramento-autonomo-de-cloud-com-zabbix-coongresso-ti)
     * https://congressodeti.com.br/
+
+* [2024-05-18-business-dashboards-metricas-negocio-com-grafana](2024-05-18-business-dashboards-metricas-negocio-com-grafana)
+    * https://congressodeti.com.br/
+
+* [2024-06-07-monitoramento-alem-do-basico-conference-latam-2024](2023-06-02-prevenindo-acidentes-em-rodovias-com-zabbix-conference-latam-2024)
+    * https://www.zabbix.com/br/events/conference_latam_2024#agenda
+
+* [2024-06-07-zabbix-expiando-bbb-conference-latam-2024](2024-06-07-zabbix-expiando-bbb-conference-latam-2024)
+    * https://www.zabbix.com/br/events/conference_latam_2024#agenda
