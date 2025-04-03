@@ -24,4 +24,5 @@ My Presentations and code related to them
 * [2024-06-07-zabbix-expiando-bbb-conference-latam-2024](2024-06-07-zabbix-expiando-bbb-conference-latam-2024)
     * https://www.zabbix.com/br/events/conference_latam_2024#agenda
 
-    
+* [2025-04-03-monitorando-kubernetes-com-zabbix-webinar-zabbix](2025-04-03-monitorando-kubernetes-com-zabbix-webinar-zabbix)
+    * https://www.zabbix.com/webinars
