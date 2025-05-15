@@ -26,3 +26,6 @@ My Presentations and code related to them
 
 * [2025-04-03-monitorando-kubernetes-com-zabbix-webinar-zabbix](2025-04-03-monitorando-kubernetes-com-zabbix-webinar-zabbix)
     * https://www.zabbix.com/webinars
+
+* [2025-15-05-webinar-zabbix-proxy-group7](2025-04-03-webinar-zabbix-proxy-group7)
+    * https://www.zabbix.com/webinars
