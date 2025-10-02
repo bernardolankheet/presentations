@@ -29,3 +29,9 @@ My Presentations and code related to them
 
 * [2025-15-05-webinar-zabbix-proxy-group7](2025-04-03-webinar-zabbix-proxy-group7)
     * https://www.zabbix.com/webinars
+
+* [2025-09-11-carreira-em-ti](2025-09-11-carreira-em-ti)
+    * EMEFTI - Lions Club de Colatina - Clube de TI   
+
+* [2025-10-02-webinar-monitoramento-web](2025-10-02-webinar-monitoramento-web)
+    * https://www.zabbix.com/webinars
