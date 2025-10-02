@@ -1,0 +1,168 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: 5e95220086f04ddea39633b071d4cf11
+      name: WEBINAR
+  templates:
+    - uuid: 5c884a64fac245a8983490234a54bfca
+      template: SCRIPT-ITEM
+      name: SCRIPT-ITEM
+      groups:
+        - name: WEBINAR
+      items:
+        - uuid: d849ef0480cc4bcea45e69cd0cb42917
+          name: 'Get Dollar - Macro'
+          type: SCRIPT
+          key: get-dollar
+          delay: 10m
+          value_type: TEXT
+          trends: '0'
+          params: |
+            var DollarUpdater = {
+                params: {},
+            
+                setParams: function(params) {
+                    ['zbxapi_url', 'zbxapi_token', 'host_id'].forEach(function(field) {
+                        if (typeof params !== 'object' || typeof params[field] === 'undefined' || params[field] === '') {
+                            throw 'Required param is not set: "' + field + '".';
+                        }
+                    });
+                    this.params = params;
+                },
+            
+                // Busca cotação do dólar
+                getDollarValue: function() {
+                    var request = new HttpRequest();
+                    var url = 'https://br.dolarapi.com/v1/cotacoes/usd';
+                    var response = request.get(url);
+                    Zabbix.log(4, '[DollarUpdater] Dollar API response: ' + response);
+            
+                    if (!response) {
+                        throw 'Dollar API response is empty';
+                    }
+                    try {
+                        var data = JSON.parse(response);
+                        if (Array.isArray(data)) {
+                            data = data[0];
+                        }
+                        if (typeof data.venda === 'undefined' || data.venda === null) {
+                            throw 'Field "venda" not found in dollar API response';
+                        }
+                        return data.venda.toString();
+                    } catch (e) {
+                        throw 'Error parsing dollar API response: ' + e;
+                    }
+                },
+            
+                // Chamada genérica à API Zabbix
+                callZabbixAPI: function(method, params) {
+                    var request = new HttpRequest();
+                    request.addHeader('Content-Type: application/json');
+            
+                    var data = {
+                        "jsonrpc": "2.0",
+                        "method": method,
+                        "params": params,
+                        "auth": this.params.zbxapi_token,
+                        "id": 1
+                    };
+            
+                    Zabbix.log(4, '[DollarUpdater] Calling Zabbix API: ' + method);
+                    var response = request.post(this.params.zbxapi_url, JSON.stringify(data));
+                    Zabbix.log(4, '[DollarUpdater] Zabbix API response: ' + response);
+            
+                    if (!response) {
+                        throw 'Empty response from Zabbix API';
+                    }
+                    var result;
+                    try {
+                        result = JSON.parse(response);
+                    } catch (e) {
+                        throw 'Invalid JSON from Zabbix API: ' + response;
+                    }
+            
+                    if (result.error) {
+                        throw 'Zabbix API error: ' + JSON.stringify(result.error);
+                    }
+            
+                    return result.result;
+                },
+            
+                // Obtém o ID da macro {$DOLLAR} no host
+                getMacroId: function() {
+                    try {
+                        var result = this.callZabbixAPI('usermacro.get', {
+                            "hostids": this.params.host_id,
+                            "search": { "macro": "DOLLAR" },
+                            "output": ["hostmacroid"]
+                        });
+            
+                        if (result.length === 0) {
+                            throw 'Macro {$DOLLAR} not found on host';
+                        }
+            
+                        return result[0].hostmacroid;
+                    } catch(e) {
+                        throw 'Error getting macro ID: ' + e;
+                    }
+                },
+            
+                // Atualiza o valor da macro
+                updateMacro: function(macroId, dollarValue) {
+                    try {
+                        this.callZabbixAPI('usermacro.update', {
+                            "hostmacroid": macroId,
+                            "value": dollarValue
+                        });
+                        Zabbix.log(4, '[DollarUpdater] Macro updated successfully');
+                    } catch(e) {
+                        throw 'Error updating macro: ' + e;
+                    }
+                }
+            };
+            
+            try {
+                // Configuração dos parâmetros
+                var params = {
+                    zbxapi_url: '{$ZBX.API.URL}',
+                    zbxapi_token: '{$ZBX.API.TOKEN}',
+                    host_id: '{$HOST.ID}'
+                };
+            
+                Zabbix.log(4, '[DollarUpdater] Starting dollar value update process');
+            
+                // Inicialização
+                DollarUpdater.setParams(params);
+            
+                // Busca cotação do dólar
+                var dollarValue = DollarUpdater.getDollarValue();
+                Zabbix.log(4, '[DollarUpdater] Dollar value obtained: ' + dollarValue);
+            
+                // Obter ID da macro
+                var macroId = DollarUpdater.getMacroId();
+                Zabbix.log(4, '[DollarUpdater] Found macro ID: ' + macroId);
+            
+                // Atualizar macro
+                DollarUpdater.updateMacro(macroId, dollarValue);
+            
+                // Se tudo ocorrer sucesso, retorna 0
+                return '0';
+            
+            } catch(error) {
+                Zabbix.log(4, '[DollarUpdater] ERROR: ' + error);
+                throw error;
+            }
+          parameters:
+            - name: host_id
+              value: '{$HOST.ID}'
+            - name: zbxapi_token
+              value: '{$ZBX.API.TOKEN}'
+            - name: zbxapi_url
+              value: '{$ZBX.API.URL}'
+      macros:
+        - macro: '{$HOST.ID}'
+          value: '12859'
+        - macro: '{$ZBX.API.TOKEN}'
+          value: 84458eba22ef6e1dd8087d7fb59aa8b0d12d1e51f9e7494434224cb7b4574e5c
+        - macro: '{$ZBX.API.URL}'
+          value: 'http://192.168.15.21/api_jsonrpc.php'

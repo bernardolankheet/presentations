@@ -1,0 +1,20 @@
+zabbix_export:
+  version: '7.0'
+  host_groups:
+    - uuid: 25f7a2e5cce040ea9418c3277df597f3
+      name: teste
+  hosts:
+    - host: CENARIO-1
+      name: CENARIO-1
+      groups:
+        - name: teste
+      httptests:
+        - name: step
+          steps:
+            - name: URL1
+              url: www.google.com
+            - name: URL2
+              url: www.linkedin.com
+            - name: URL3
+              url: www.argnoed.com.br
+      inventory_mode: DISABLED

@@ -1,0 +1,30 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: 5e95220086f04ddea39633b071d4cf11
+      name: WEBINAR
+  templates:
+    - uuid: a2f5baf42a06486194a9badf4c624a89
+      template: 'HTTP AGENT'
+      name: 'HTTP AGENT'
+      groups:
+        - name: WEBINAR
+      items:
+        - uuid: 9f33c952364048e08dc55748afbdffca
+          name: Cart
+          type: HTTP_AGENT
+          key: cart
+          value_type: TEXT
+          trends: '0'
+          url: 'https://fakestoreapi.com/carts'
+        - uuid: f55b670621044c6daa6196bcfd7873b9
+          name: 'Total Carrinhos Abondonados'
+          type: DEPENDENT
+          key: total.cards.discarted
+          delay: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $..id.length()
+          master_item:
+            key: cart

@@ -1,0 +1,30 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: 5e95220086f04ddea39633b071d4cf11
+      name: WEBINAR
+  templates:
+    - uuid: f24a454f8cdf41648ba2e5d11b9dbaa2
+      template: 'WEB By ZBX-Agent'
+      name: 'WEB By ZBX-Agent'
+      groups:
+        - name: WEBINAR
+      items:
+        - uuid: 4e8a06aa8e6d448ba46e94bef052d8e0
+          name: 'Web Page Get'
+          key: 'web.page.get[https://fakestoreapi.com,carts,443]'
+          delay: 10m
+          value_type: TEXT
+          trends: '0'
+        - uuid: dacb597d2eba4e0aa83c5fb13ccbda7c
+          name: 'Web Page Perf'
+          key: 'web.page.perf[https://fakestoreapi.com,carts,443]'
+          delay: 10m
+          value_type: FLOAT
+          trends: '0'
+        - uuid: 6a1400553b6f4c93af00664bb93526eb
+          name: 'Web Page Regex - Status Code'
+          key: 'web.page.regexp[https://fakestoreapi.com,carts,443,HTTP.*,,]'
+          delay: 10m
+          value_type: CHAR
+          trends: '0'
