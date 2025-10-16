@@ -35,3 +35,6 @@ My Presentations and code related to them
 
 * [2025-10-02-webinar-monitoramento-web](2025-10-02-webinar-monitoramento-web)
     * https://www.zabbix.com/webinars
+
+* [2025-10-16-webinar-zabbix-server-ha](2025-10-16-webinar-zabbix-server-ha)
+    * https://www.zabbix.com/webinars
