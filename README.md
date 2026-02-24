@@ -38,3 +38,6 @@ My Presentations and code related to them
 
 * [2025-10-16-webinar-zabbix-server-ha](2025-10-16-webinar-zabbix-server-ha)
     * https://www.zabbix.com/webinars
+
+* [2026-02-23-grafana-friends-meetup-colatina](2026-02-23-grafana-friends-meetup-colatina)
+    * https://www.meetup.com/pt-br/grafana-friends-espirito-santo/events/
